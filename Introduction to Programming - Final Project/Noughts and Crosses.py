@@ -42,7 +42,7 @@ class Player:                                                          # Keeps f
         self.player_number = Player.player_count                       # Gets player number based on order created
         self.player_piece = self.get_piece()                           # Uses get_piece to get GUI Piece
 
-    def get_piece(self):                                                   # Gets the players GUI Piece based on number
+    def get_piece(self):                                               # Gets the players GUI Piece based on number
         if self.player_count == 1:
             return "X"
         elif self.player_count == 2:
@@ -69,28 +69,24 @@ class Game:
         input("   Press any key to start!")
 
     def valid_placement(self, choice, piece):                           # Checks if piece placement is a valid location
-        # print(choice)
         for key in self.board.board_dictionary.keys():
-            # print(key)
             if choice not in self.board.board_dictionary.keys():
                 print("That is not a valid placement!\n")
                 return True
             elif self.board.board_dictionary.get(choice) != " ":
-                # print("-" + self.board.board_dictionary.get(key))
                 print("Theres already a piece there!!!\n")
                 return True
             elif choice == key:
                 self.board.board_dictionary[choice] = piece
-                #print(self.board.board_dictionary)
                 return False
 
-    def check_victory(self):                                                # Returns True if Vic conditions met
+    def check_victory(self):                                            # Returns True if Vic conditions met
         victory = [["c1", "c2", "c3"], ["a1", "a2", "a3"], ["b1", "b2", "b3"],
                    ["c1", "b1", "a1"], ["c2", "b2", "a2"], ["c3", "b3", "a3"],
                    ["c1", "b2", "a3"], ["c3", "b2", "a1"]]
         x_count = 0
         o_count = 0
-        winner = ""
+
         for victory_sub_list in victory:
             for value in victory_sub_list:
                 if self.board.board_dictionary.get(value) == "X":
@@ -110,11 +106,9 @@ class Game:
 
     def game_over(self):                                                # Returns False if game over met
         count = 0
-        # print("Count1: " + str(count))
-        for key in game.board.board_dictionary:                         # Calculates how much of the board is empty
-            # print("Key: " + str(key))
-            # print(game.board.board_dictionary.get(key))
-            if game.board.board_dictionary.get(key) != " ":
+
+        for key in self.board.board_dictionary:                         # Calculates how much of the board is empty
+            if self.board.board_dictionary.get(key) != " ":
                 count += 1
 
         if count == self.board.y_size * self.board.x_size:              # Checks if the board is full
@@ -129,7 +123,6 @@ class Game:
                 print("Error! I need an Adult!")
             return False
         else:
-            # print("Count2: " + str(count))
             return True
 
     def play_round(self):                                               # plays until game_over
