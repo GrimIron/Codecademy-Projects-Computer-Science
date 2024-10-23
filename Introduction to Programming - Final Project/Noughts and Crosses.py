@@ -42,11 +42,10 @@ class Player:                                                          # Keeps f
         self.player_number = Player.player_count                       # Gets player number based on order created
         self.player_piece = self.get_piece()                           # Uses get_piece to get GUI Piece
 
-    @staticmethod
-    def get_piece():                                                   # Gets the players GUI Piece based on number
-        if Player.player_count == 1:
+    def get_piece(self):                                                   # Gets the players GUI Piece based on number
+        if self.player_count == 1:
             return "X"
-        elif Player.player_count == 2:
+        elif self.player_count == 2:
             return "O"
 
     @staticmethod
@@ -85,8 +84,7 @@ class Game:
                 #print(self.board.board_dictionary)
                 return False
 
-    @staticmethod
-    def check_victory():                                                # Check if player has met victory condition
+    def check_victory(self):                                                # Returns True if Vic conditions met
         victory = [["c1", "c2", "c3"], ["a1", "a2", "a3"], ["b1", "b2", "b3"],
                    ["c1", "b1", "a1"], ["c2", "b2", "a2"], ["c3", "b3", "a3"],
                    ["c1", "b2", "a3"], ["c3", "b2", "a1"]]
@@ -95,9 +93,9 @@ class Game:
         winner = ""
         for victory_sub_list in victory:
             for value in victory_sub_list:
-                if game.board.board_dictionary.get(value) == "X":
+                if self.board.board_dictionary.get(value) == "X":
                     x_count += 1
-                elif game.board.board_dictionary.get(value) == "O":
+                elif self.board.board_dictionary.get(value) == "O":
                     o_count += 1
             if x_count == 3:
                 winner = "X"
@@ -110,17 +108,18 @@ class Game:
                 o_count = 0
         return False
 
-    def game_over(self):
+    def game_over(self):                                                # Returns False if game over met
         count = 0
         # print("Count1: " + str(count))
-        for key in game.board.board_dictionary:
+        for key in game.board.board_dictionary:                         # Calculates how much of the board is empty
             # print("Key: " + str(key))
             # print(game.board.board_dictionary.get(key))
             if game.board.board_dictionary.get(key) != " ":
                 count += 1
-        if count == self.board.y_size * self.board.x_size:
+
+        if count == self.board.y_size * self.board.x_size:              # Checks if the board is full
             return False
-        elif self.check_victory():
+        elif self.check_victory():                                      # Checks victory conditions
             winner = self.check_victory()
             if winner[1] == "X":
                 print("The Winner is Player 1!")
@@ -133,21 +132,26 @@ class Game:
             # print("Count2: " + str(count))
             return True
 
+    def play_round(self):
+        while self.game_over():
+            print("Player 1's Turn!")
+
+            while self.valid_placement(self.player1.choice(), self.player1.player_piece):
+                self.board.display()
+            self.board.display()
+
+            if not game.game_over():
+                break
+
+            print("Player 2's Turn!")
+            while self.valid_placement(self.player2.choice(), self.player2.player_piece):
+                self.board.display()
+            self.board.display()
+
 
 game = Game(3, 3)
 game.board.display()
-while game.game_over():
-    print("Player 1's Turn!")
-    while game.valid_placement(game.player1.choice(), game.player1.player_piece):
-
-        game.board.display()
-    game.board.display()
-    if not game.game_over():
-        break
-    print("Player 2's Turn!")
-    while game.valid_placement(game.player2.choice(), game.player2.player_piece):
-        game.board.display()
-    game.board.display()
+game.play_round()
 
 
 
