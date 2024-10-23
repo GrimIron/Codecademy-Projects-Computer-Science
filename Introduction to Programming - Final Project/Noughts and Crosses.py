@@ -132,7 +132,7 @@ class Game:
             # print("Count2: " + str(count))
             return True
 
-    def play_round(self):
+    def play_round(self):                                               # plays until game_over
         while self.game_over():
             print("Player 1's Turn!")
 
@@ -140,7 +140,7 @@ class Game:
                 self.board.display()
             self.board.display()
 
-            if not game.game_over():
+            if not self.game_over():
                 break
 
             print("Player 2's Turn!")
