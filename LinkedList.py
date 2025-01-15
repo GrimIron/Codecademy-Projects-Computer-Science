@@ -47,4 +47,7 @@ class LinkedList:
                     current_node = next_node                                # continues loop
 
     def remove_all_instances(self, value_to_remove):
+        current_node = self.get_head_node()
+        if current_node == value_to_remove():
+            
 
