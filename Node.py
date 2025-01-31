@@ -13,7 +13,5 @@ class Node:
         self.next_node = next_node
 
 
-node1 = node(30)
-print(node1.get_value())
 
 

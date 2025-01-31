@@ -15,7 +15,7 @@ class Node:
 
 class LinkedList:
     def __init__(self, value=None):
-        self.head_node = value
+        self.head_node = None
 
     def get_head_node(self):
         return self.head_node
@@ -28,26 +28,43 @@ class LinkedList:
     def stringify_list(self):
         string_list = ""
         current_node = self.head_node                                # Starts at the beginning of the list
+
         while current_node:                                          # Creates loop
             if current_node.get_value():                             # checks if last node, if is breaks loop
-                string_list += str(current_node.get_value()) + "/n"
+                string_list += str(current_node.get_value()) + "\n"
             current_node = current_node.get_next_node()              # Progresses to next node if loop continues
         return string_list
 
-    def remove_node(self, value_to_remove):
-        current_node = self.get_head_node()
-        if current_node == value_to_remove:
-            self.head_node = current_node.get_next_node()                   # checks if first node, before looping
-        else:
-            while current_node:                                             # creates loop
-                next_node = current_node.get_next_node()
-                if next_node.get_value() == value_to_remove():              # Orphans the next node: # n1 -> n2 - > n3
-                    current_node.set_next_node(next_node.get_next_node())   # {n1} -> {n2} - > {n3} becomes {n1} -> {n3}
-                else:
-                    current_node = next_node                                # continues loop
+    def remove_node(self, node_to_remove):
+        current_node = self.head_node                               # checks the head node to see if value to remove
+
+        if current_node.get_value() == node_to_remove:
+            self.head_node = current_node.get_next_node()
+        else:                                                       # if NOT headnode Starts a loop through the list
+            while current_node != None:
+                next_node = current_node.get_next_node()            # checks one node ahead
+                if next_node == None:
+                    return None
+                if next_node.get_value() == node_to_remove:                 # if next node is value to remove,
+                    current_node.set_next_node(next_node.get_next_node())   # set current_node pointer to skip next node
+
+                current_node = current_node.get_next_node()         # sets the current node to the next node
 
     def remove_all_instances(self, value_to_remove):
-        current_node = self.get_head_node()
-        if current_node == value_to_remove():
-            
+        current_node = self.head_node
+        prev_node = No
 
+n1 = LinkedList()
+n1.insert_new_node(3)
+n1.insert_new_node(5)
+n1.insert_new_node(9)
+n1.insert_new_node(9)
+n1.insert_new_node(8)
+#print(n1.stringify_list())
+n1.remove_node(5)
+print("----")
+print(n1.stringify_list())
+print("----")
+n1.remove_all_instances(9)
+print("----")
+print(n1.stringify_list())
