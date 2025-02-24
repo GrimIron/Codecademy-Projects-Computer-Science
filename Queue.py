@@ -1,5 +1,6 @@
 from Node import Node
 
+
 class Queue:
     def __init__(self, max_size=None):
         self.head = None
@@ -8,6 +9,7 @@ class Queue:
         self.size = 0
 
     def enqueue(self, value):
+
         if self.has_space():
             item_to_add = Node(value)
             print("Adding " + str(item_to_add.get_value()) + " to the queue!")
