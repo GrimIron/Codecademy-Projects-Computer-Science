@@ -46,7 +46,7 @@ def update_point_totals(dictionary):
     # Gets players name
     for player in player_to_words:
         player_points = 0
-        # Uses name to get there word list
+        # Uses name to get their word list
         words = player_to_words.get(player)
         # Iterates through the list of words and runs score_word() to get the word score and appends the the players overall score
         for word in words:
