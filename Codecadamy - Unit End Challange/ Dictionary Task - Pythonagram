@@ -20,7 +20,7 @@ points_to_players = {}
 def score_word(word):
   point_total = 0
   for letter in word:
-    word_score = score_dictionary.get(letter)
+    word_score = score_dictionary.get(letter, 0)
     point_total = point_total + word_score
   return point_total
 
