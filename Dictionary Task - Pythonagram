@@ -1,11 +1,22 @@
-letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-points = [1, 2, 2, 2, 1, 3, 3, 3, 1, 4, 3, 1, 2, 3, 1, 3, 5, 1, 1, 1, 2, 3, 3, 4, 3, 5]
+letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
+
+"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+points = [1, 2, 2, 2, 1, 3, 3,3, 1, 4, 3, 1, 2, 3, 1, 3, 5, 1, 1, 1, 2, 3, 3, 4, 3, 5,
+
+1, 2, 2, 2, 1, 3, 3, 3, 1, 4, 3, 1, 2, 3, 1, 3, 5, 1, 1, 1, 2, 3, 3, 4, 3, 5]
 
 score_dictionary = dict(zip(letters, points))
 
-for i in score_dictionary:
-  print(f"{i} : {score_dictionary.get(i)}")
+player_to_words = {
+  "player1" : ["BLUE", "TENNIS", "EXIT"], 
+  "wordNerd" : ["EARTH", "EYES", "MACHINE"], 
+  "Lexi Con" : ["ERASER", "BELLY", "HUSKY"],
+  "Prof Reader" : ["ZAP", "COMA", "PERIOD"]}
+  
+points_to_players = {}
 
+
+# Checks the letters of the word and compares them to the score for letter and added them to the point total
 def score_word(word):
   point_total = 0
   for letter in word:
@@ -13,19 +24,33 @@ def score_word(word):
     point_total = point_total + word_score
   return point_total
 
-player_to_words = {
-  "player1" : ["BLUE", "TENNIS", "EXIT"], 
-  "wordNerd" : ["EARTH", "EYES", "MACHINE"], 
-  "Lexi Con" : ["ERASER", "BELLY", "HUSKY"],
-  "Prof Reader" : ["ZAP", "COMA", "PERIOD"]}
 
-points_to_players = {}
+# Adds a word to a player if the player does not exist added them to the Dict
+def play_word(player, word):
+  while True:
+    try:
+      player_to_words[player].append(word)
+      break
+    except KeyError:
+      player_to_words[player] = []
+      player_to_words[player].append(word)
+      break
 
-for name in player_to_words:
-  player_points = 0 
-  for word in player_to_words.get(name):
-    player_points = player_points + score_word(word)
-  points_to_players[name] = player_points
 
-for player in points_to_players:
-  print(f"{player} score : {points_to_players.get(player)}")
+# Adds the players name and score to Dict points_to_players{}
+def update_point_totals():
+  for name in player_to_words:
+    player_points = 0 
+    for word in player_to_words.get(name):
+      player_points = player_points + score_word(word)
+    points_to_players[name] = player_points
+  for player in points_to_players:
+    print(f"{player} score : {points_to_players.get(player)}")
+
+play_word("player1", "Banana")
+play_word("player1", "Apple")
+play_word("Glenn", "Dog")
+play_word("Glenn", "Cat")
+play_word("Peppa", "A")
+play_word("player1", "Pear")
+update_point_totals()
