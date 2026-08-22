@@ -1,0 +1,31 @@
+letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+points = [1, 2, 2, 2, 1, 3, 3, 3, 1, 4, 3, 1, 2, 3, 1, 3, 5, 1, 1, 1, 2, 3, 3, 4, 3, 5]
+
+score_dictionary = dict(zip(letters, points))
+
+for i in score_dictionary:
+  print(f"{i} : {score_dictionary.get(i)}")
+
+def score_word(word):
+  point_total = 0
+  for letter in word:
+    word_score = score_dictionary.get(letter)
+    point_total = point_total + word_score
+  return point_total
+
+player_to_words = {
+  "player1" : ["BLUE", "TENNIS", "EXIT"], 
+  "wordNerd" : ["EARTH", "EYES", "MACHINE"], 
+  "Lexi Con" : ["ERASER", "BELLY", "HUSKY"],
+  "Prof Reader" : ["ZAP", "COMA", "PERIOD"]}
+
+points_to_players = {}
+
+for name in player_to_words:
+  player_points = 0 
+  for word in player_to_words.get(name):
+    player_points = player_points + score_word(word)
+  points_to_players[name] = player_points
+
+for player in points_to_players:
+  print(f"{player} score : {points_to_players.get(player)}")
