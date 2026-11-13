@@ -2,10 +2,6 @@ def sum_digits(n):
   if n <= 9:
     return n
   last_num = n % 10  
-
-  # e.x 123 % 10 = 3 
-  # retrun sum_digits(12) + 3 
-
   return sum_digits(n // 10) + last_num 
 
 # test cases
